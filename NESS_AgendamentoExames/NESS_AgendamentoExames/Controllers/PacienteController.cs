@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NESS_AgendamentoExames.Models;
-using NESS_AgendamentoExames.Repository;
 using NESS_AgendamentoExames.Repository.Interfaces;
 
 namespace NESS_AgendamentoExames.Controllers
@@ -28,6 +25,13 @@ namespace NESS_AgendamentoExames.Controllers
             try
             {
                 List<Paciente> listaPacientes = _repository.GetAll();
+
+                ViewData["Informacao"] = "Acesso ao banco dados realizado com sucesso";
+
+                if (!listaPacientes.Any())
+                {
+                    ViewData["Aviso"] = "Não há dados disponíveis!";
+                }
 
                 return View(listaPacientes);
             }

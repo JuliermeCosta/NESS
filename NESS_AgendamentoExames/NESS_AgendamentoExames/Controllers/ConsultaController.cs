@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -31,6 +30,13 @@ namespace NESS_AgendamentoExames.Controllers
             {
                 List<Consulta> listaConsultas = _repository.GetAll();
 
+                ViewData["Informacao"] = "Acesso ao banco dados realizado com sucesso";
+
+                if (!listaConsultas.Any())
+                {
+                    ViewData["Aviso"] = "Não há dados disponíveis!";
+                }                
+
                 return View(listaConsultas);
             }
             catch (Exception ex)
@@ -57,6 +63,8 @@ namespace NESS_AgendamentoExames.Controllers
                     throw new Exception("Consulta não encontrada!");
                 }
 
+                ViewData["Informacao"] = "Acesso ao banco dados realizado com sucesso";
+
                 return View(consulta);
             }
             catch (Exception ex)
@@ -79,11 +87,13 @@ namespace NESS_AgendamentoExames.Controllers
                 listaDatas.Insert(0, new SelectListItem("Selecione uma data disponível", string.Empty));
                 ViewBag.Datas = listaDatas;
 
+                ViewData["Informacao"] = "Acesso ao banco dados realizado com sucesso";
+
                 return View();
             }
             catch (Exception ex)
             {
-                @ViewData["Error"] = ex.Message;
+                ViewData["Error"] = ex.Message;
                 return View();
             }
         }
@@ -133,6 +143,8 @@ namespace NESS_AgendamentoExames.Controllers
             List<SelectListItem> listaDatasCompleta = listaDatas.OrderBy(x => x.Data).Select(x => new SelectListItem(x.Data.ToString("dd/MM/yyyy"), x.Id.ToString())).ToList();
             listaDatasCompleta.Insert(0, new SelectListItem("Selecione uma data disponível", string.Empty));
             ViewBag.Datas = listaDatasCompleta;
+
+            ViewData["Informacao"] = "Acesso ao banco dados realizado com sucesso";
 
             return View(consulta);
         }

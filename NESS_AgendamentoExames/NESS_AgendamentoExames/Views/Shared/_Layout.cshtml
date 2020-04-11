@@ -51,26 +51,46 @@
                 <hr />
             }
 
-            @if (ViewData["Error"] != null)
+            @if (ViewData["Informacao"] != null)
             {
-                <div class="alert alert-danger" role="alert">
-                    @ViewData["Error"]
+                <div class="alert alert-info alert-dismissible fade show" role="alert" id="autohide">
+                    @ViewData["Informacao"]
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-                ViewData["Error"] = null;
+                ViewData["Informacao"] = null;
             }
 
             @if (ViewData["Aviso"] != null)
             {
-                <div class="alert alert-warning" role="alert">
+                <div class="alert alert-warning alert-dismissible fade show" role="alert" id="autohide">
                     @ViewData["Aviso"]
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
                 ViewData["Aviso"] = null;
             }
 
+            @if (ViewData["Error"] != null)
+            {
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    @ViewData["Error"]
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                ViewData["Error"] = null;
+            }
+
             @if (TempData.Keys.Contains("Sucesso"))
             {
-                <div class="alert alert-success" role="alert">
+                <div class="alert alert-success alert-dismissible fade show" role="alert" id="autohide">
                     @TempData["Sucesso"]
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
             }
 
@@ -106,6 +126,14 @@
             "columnDefs": [
                 { "orderable": false, "targets": 2 }
             ]
+        });
+
+        $(function () {
+            window.setTimeout(function () {
+                $(".alert").fadeTo(1000, 0).slideUp(1000, function () {
+                    $(this).remove();
+                });
+            }, 5000);
         });
 
     </script>
