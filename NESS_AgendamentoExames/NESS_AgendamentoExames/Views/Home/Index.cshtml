@@ -1,8 +1,28 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿<div class="text-center">
+    <h2>Sistema Para Cadastro de Pacientes</h2>
+    <h2>e Agendamento de Consultas</h2>
+    <br />
+    <div class="row" align="center">
+        <div class="col-sm-6">
+            <a class="text-dark" asp-controller="Paciente" asp-action="Index">
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="~/img/pessoas.png" alt="Cadastro de pacientes">
+                    <div class="card-body">
+                        <h5 class="card-title"><b>Cadastro de Pacientes</b></h5>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-sm-6">
+            <a class="text-dark" asp-controller="Consulta" asp-action="Index">
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="~/img/agendar-consulta.png" alt="Agendamento de consultas">
+                    <div class="card-body">
+                        <h5 class="card-title"><b>Agendamento de Consultas</b></h5>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>

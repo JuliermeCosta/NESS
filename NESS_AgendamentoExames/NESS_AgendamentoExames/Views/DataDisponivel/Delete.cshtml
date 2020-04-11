@@ -1,0 +1,24 @@
+﻿@model NESS_AgendamentoExames.Models.DataDisponivel
+
+@{
+    ViewData["Title"] = "Apagar Data";
+}
+
+<h4>Você tem certeza que deseja apagar a data abaixo?</h4>
+
+<br />
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Data)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Data)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="submit" value="Sim" class="btn btn-danger" /> | <a asp-action="Index">Voltar</a>
+    </form>
+</div>

@@ -1,0 +1,38 @@
+﻿@model NESS_AgendamentoExames.Models.Consulta
+
+@{
+    ViewData["Title"] = "Editar Consulta";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Paciente.Nome" class="control-label"></label>
+                <select asp-for="Paciente.Id"
+                        asp-items="@ViewBag.Pacientes"
+                        class="custom-select"></select>
+                <span asp-validation-for="Paciente.Id" class="text-danger"></span>
+                <br />
+                <br />
+                <label asp-for="DataDisponivel.Data" class="control-label"></label>
+                <select asp-for="DataDisponivel.Id"
+                        asp-items="@ViewBag.Datas"
+                        class="custom-select"></select>
+                <span asp-validation-for="DataDisponivel.Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Atualizar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Voltar para a lista de consultas</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

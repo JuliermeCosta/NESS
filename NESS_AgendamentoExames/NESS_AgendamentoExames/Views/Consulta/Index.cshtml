@@ -1,0 +1,39 @@
+﻿@model IEnumerable<NESS_AgendamentoExames.Models.Consulta>
+
+@{
+    ViewData["Title"] = "Consultas";
+}
+<p>
+    <a asp-action="Create" class="btn btn-primary">Novo</a>
+</p>
+<table id="tabela2" class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Paciente.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataDisponivel.Data)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Paciente.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataDisponivel.Data)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Detalhes", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Excluir", "Delete", new { id = item.Id }, new { @class = "text-danger" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

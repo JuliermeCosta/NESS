@@ -1,0 +1,31 @@
+﻿@model NESS_AgendamentoExames.Models.Consulta
+
+@{
+    ViewData["Title"] = "Apagar Consulta";
+}
+
+<h4>Você tem certeza que deseja apagar a consulta abaixo?</h4>
+
+<br />
+<div>    
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Paciente.Nome)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Paciente.Nome)
+        </dd>
+    </dl>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DataDisponivel.Data)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DataDisponivel.Data)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="submit" value="Sim" class="btn btn-danger" /> | <a asp-action="Index">Voltar</a>
+    </form>
+</div>

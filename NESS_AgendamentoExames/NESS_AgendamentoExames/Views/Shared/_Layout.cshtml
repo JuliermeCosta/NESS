@@ -3,15 +3,26 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - NESS_AgendamentoExames</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    @if (ViewData["Title"] == null)
+    {
+        <title>Agendamento de Exames</title>
+    }
+    else
+    {
+        <title>@ViewData["Title"] - Agendamento de Exames</title>
+    }
+
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-spacelab.css" />
+    <link rel="stylesheet" href="~/lib/DataTables/datatables.css" />
+    <link rel="stylesheet" href="~/lib/DataTables/DataTables-1.10.20/css/dataTables.bootstrap4.css" />
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-primary border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">NESS_AgendamentoExames</a>
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index">Agendamento de Exames</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -19,10 +30,13 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link" asp-controller="Paciente" asp-action="Index">Pacientes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link" asp-controller="Consulta" asp-action="Index">Consultas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="DataDisponivel" asp-action="Index">Datas</a>
                         </li>
                     </ul>
                 </div>
@@ -31,18 +45,70 @@
     </header>
     <div class="container">
         <main role="main" class="pb-3">
+            @if (ViewData["Title"] != null)
+            {
+                <h1>@ViewData["Title"]</h1>
+                <hr />
+            }
+
+            @if (ViewData["Error"] != null)
+            {
+                <div class="alert alert-danger" role="alert">
+                    @ViewData["Error"]
+                </div>
+                ViewData["Error"] = null;
+            }
+
+            @if (ViewData["Aviso"] != null)
+            {
+                <div class="alert alert-warning" role="alert">
+                    @ViewData["Aviso"]
+                </div>
+                ViewData["Aviso"] = null;
+            }
+
+            @if (TempData.Keys.Contains("Sucesso"))
+            {
+                <div class="alert alert-success" role="alert">
+                    @TempData["Sucesso"]
+                </div>
+            }
+
             @RenderBody()
         </main>
     </div>
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2020 - NESS_AgendamentoExames - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2020 - NESS_AgendamentoExames - Julierme Andrade Costa Santos
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/DataTables/datatables.js"></script>
+    <script src="~/lib/DataTables/DataTables-1.10.20/js/dataTables.bootstrap4.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script type="text/javascript">
+
+        $("#tabela").DataTable({
+            "language": {
+                "url": "./lib/DataTables/Portuguese-Brasil.json"
+            },
+            "columnDefs": [
+                { "orderable": false, "targets": 1 }
+            ]
+        });
+
+        $("#tabela2").DataTable({
+            "language": {
+                "url": "./lib/DataTables/Portuguese-Brasil.json"
+            },
+            "columnDefs": [
+                { "orderable": false, "targets": 2 }
+            ]
+        });
+
+    </script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

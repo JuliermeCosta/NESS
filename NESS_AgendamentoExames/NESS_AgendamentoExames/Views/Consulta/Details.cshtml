@@ -1,0 +1,27 @@
+﻿@model NESS_AgendamentoExames.Models.Consulta
+
+@{
+    ViewData["Title"] = "Detalhes da Consulta";
+}
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Paciente.Nome)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Paciente.Nome)
+        </dd>
+    </dl>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DataDisponivel.Data)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DataDisponivel.Data)
+        </dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) | <a asp-action="Index">Voltar para a lista de consultas</a>
+</div>

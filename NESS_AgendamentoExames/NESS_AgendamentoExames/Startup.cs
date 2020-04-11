@@ -8,6 +8,9 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using NESS_AgendamentoExames.Models;
+using NESS_AgendamentoExames.Repository;
+using NESS_AgendamentoExames.Repository.Interfaces;
 
 namespace NESS_AgendamentoExames
 {
@@ -19,14 +22,16 @@ namespace NESS_AgendamentoExames
         }
 
         public IConfiguration Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
+        
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddScoped<IRepository<Paciente>, PacienteRepository>();
+            services.AddScoped<IRepository<DataDisponivel>, DataDisponivelRepository>();
+            services.AddScoped<IRepository<Consulta>, ConsultaRepository>();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -36,7 +41,6 @@ namespace NESS_AgendamentoExames
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
             app.UseHttpsRedirection();

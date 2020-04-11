@@ -1,0 +1,34 @@
+﻿@model IEnumerable<NESS_AgendamentoExames.Models.DataDisponivel>
+
+@{
+    ViewData["Title"] = "Datas";
+}
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Novo</a>
+</p>
+
+<table id="tabela" class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Data)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (DataDisponivel item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Data)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Excluir", "Delete", new { id = item.Id }, new { @class = "text-danger" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
